@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 import requests
+import time
 
 # 领取黑钻的请求
 
@@ -32,6 +33,7 @@ def getCollectCoins(serialNumber):
 
 
 def main():
+    updatetime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     cookies = {
         'mp_MA-9E66-C87EFACB60BC_hubble': '%7B%22sessionReferrer%22%3A%20%22%22%2C%22updatedTime%22%3A%201541746563337%2C%22sessionStartTime%22%3A%201541745948401%2C%22deviceUdid%22%3A%20%220c7f13cc-7f12-45ba-9b9e-ede9e3fd900f%22%2C%22persistedTime%22%3A%201541739058922%2C%22LASTEVENT%22%3A%20%7B%22eventId%22%3A%20%22click%22%2C%22time%22%3A%201541746563338%7D%2C%22sessionUuid%22%3A%20%22221d5557-e041-4d8e-a9de-91de73ecd490%22%2C%22user_id%22%3A%208411%7D',
         'NTES_YD_SESS': '0EGImViy23cumCi0_CCtBJilfTKwp0RJydNlrHu0ZlciO1zGOBYERDROXhx1kfqrmuutfY8.NiEinNXJ8SAUI8.3MBeF1v5jTxcmK2AO4FPGxYaUEUhDhtAvZB2dpzT19GbaFW..wrY9Jt_ZbQpbFeqVLc8Ajrd.GN1FxhpOrPGcJURG9YZPWYNR4eesz6hvnHt0toQBOeYcR7oE2sIivDdhtea5rcxrvYRred4NSIgik',
@@ -52,16 +54,24 @@ def main():
 
     data = '{"type":0}'
 
-    # 获取黑钻的请求
-    response = requests.post('https://star.8.163.com/api/home/v2/userInfoAndCollectCoins',
-                             headers=headers, cookies=cookies, data=data)
-    collectCoins = response.json()['data']['collectCoins']
+    try:
+        # 获取黑钻的请求
+        response = requests.post('https://star.8.163.com/api/home/v2/userInfoAndCollectCoins',
+                                 headers=headers, cookies=cookies, data=data)
+        collectCoins = response.json()['data']['collectCoins']
 
-    if len(collectCoins) == 0:
-        print '当前没有黑钻可以领取'
-    else:
-        for collectCoinsItem in collectCoins:
-            getCollectCoins(collectCoinsItem['serialNumber'])
+        if len(collectCoins) == 0:
+            print "[ {0} ] {1}".format(updatetime, 0)
+        else:
+            coins = 0
+            for collectCoinsItem in collectCoins:
+                getCollectCoins(collectCoinsItem['serialNumber'])
+                coins = coins + collectCoinsItem['serialNumber']
+
+            print "[ {0} ] {1}".format(updatetime, coins)
+    except Exception as e:
+        value = -1
+        print "[ {0} ] {1}".format(updatetime, value)
 
 
 if __name__ == "__main__":
