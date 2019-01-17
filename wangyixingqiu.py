@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+from elasticsearch import Elasticsearch, helpers
 import requests
 import time
+import sys
 
 # 领取黑钻的请求
 
@@ -31,6 +33,26 @@ def getCollectCoins(serialNumber):
 
     # print response.json()
 
+def es(datas, index="xingqiu", type="xingqiu"):
+    """
+    insert es
+    """
+    es = Elasticsearch([{"host": "localhost", "port": 9200}])
+    actions = [
+        {
+            '_op_type': 'index',
+            '_index': index,
+            '_type': type,
+            '_source': d
+        }
+        for d in datas
+    ]
+
+    try:
+        helpers.bulk( es, actions )
+    except Exception, e:
+        print e
+        sys.exit(1)
 
 def main():
     updatetime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -66,12 +88,20 @@ def main():
             coins = 0
             for collectCoinsItem in collectCoins:
                 getCollectCoins(collectCoinsItem['serialNumber'])
-                coins = coins + collectCoinsItem['serialNumber']
+                coins = coins + float(collectCoinsItem['virCount'])
 
-            print "[ {0} ] {1}".format(updatetime, coins)
     except Exception as e:
-        value = -1
-        print "[ {0} ] {1}".format(updatetime, value)
+        coins = -1
+
+    datas = [
+                {
+                    "num": coins,
+                    "@timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.000", time.localtime())
+                }
+            ]
+    es(datas)
+    
+    print "[ {0} ] {1}".format(updatetime, value)
 
 
 if __name__ == "__main__":
