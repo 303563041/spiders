@@ -11,10 +11,10 @@ import sys
 
 def getCollectCoins(serialNumber):
     cookies = {
-        'mp_MA-9E66-C87EFACB60BC_hubble': '%7B%22sessionReferrer%22%3A%20%22%22%2C%22updatedTime%22%3A%201541746563337%2C%22sessionStartTime%22%3A%201541745948401%2C%22deviceUdid%22%3A%20%220c7f13cc-7f12-45ba-9b9e-ede9e3fd900f%22%2C%22persistedTime%22%3A%201541739058922%2C%22LASTEVENT%22%3A%20%7B%22eventId%22%3A%20%22click%22%2C%22time%22%3A%201541746563338%7D%2C%22sessionUuid%22%3A%20%22221d5557-e041-4d8e-a9de-91de73ecd490%22%2C%22user_id%22%3A%208411%7D',
-        'NTES_YD_SESS': '0EGImViy23cumCi0_CCtBJilfTKwp0RJydNlrHu0ZlciO1zGOBYERDROXhx1kfqrmuutfY8.NiEinNXJ8SAUI8.3MBeF1v5jTxcmK2AO4FPGxYaUEUhDhtAvZB2dpzT19GbaFW..wrY9Jt_ZbQpbFeqVLc8Ajrd.GN1FxhpOrPGcJURG9YZPWYNR4eesz6hvnHt0toQBOeYcR7oE2sIivDdhtea5rcxrvYRred4NSIgik',
-        'STAR_YD_SESS': '0EGImViy23cumCi0_CCtBJilfTKwp0RJydNlrHu0ZlciO1zGOBYERDROXhx1kfqrmuutfY8.NiEinNXJ8SAUI8.3MBeF1v5jTxcmK2AO4FPGxYaUEUhDhtAvZB2dpzT19GbaFW..wrY9Jt_ZbQpbFeqVLc8Ajrd.GN1FxhpOrPGcJURG9YZPWYNR4eesz6hvnHt0toQBOeYcR7oE2sIivDdhtea5rcxrvYRred4NSIgik',
-        'STAREIG': '7a8529f981ec6f63d7200c44248a8bcb511b59f4',
+        'mp_MA-9E66-C87EFACB60BC_hubble': 'xxxxxxxx',
+        'NTES_YD_SESS': 'xxxx',
+        'STAR_YD_SESS': 'xxxx',
+        'STAREIG': 'xxxx',
     }
 
     headers = {
