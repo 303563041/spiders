@@ -7,16 +7,17 @@ import requests
 import subprocess
 
 def upload_youtube(title):
-    p = \
-        subprocess.Popen('/usr/local/var/pyenv/shims/youtube-upload --title={0} --privacy=private videos/{1}.mp4'.format(title,
-                         title), shell=True, stdout=subprocess.PIPE,
+    cmd = "/usr/local/var/pyenv/shims/youtube-upload --title={0} --privacy=private videos/{1}.mp4".format(title,
+                         title)
+    p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE)
+
     if p.stderr.readlines():
-        print('Upload video << {0} >> fail: {1}'.format(title,
+        print('<< {0} >> 上传失败: {1}'.format(title,
                 p.stderr.readlines()))
         return
 
-    print('Upload video << {0} >> Success!!!'.format(title))
+    print('Upload video << {0} >> 上传成功'.format(title))
 
 
 if __name__ == '__main__':
@@ -32,6 +33,9 @@ if __name__ == '__main__':
                    device_info=device_info,
                    token=API_TOKEN)
 
+
+    print(videos['aweme_list'][0])
+    '''
     for i in videos['aweme_list']:
         title = i['share_info']['share_title']
         download_url = i['video']['play_addr']['url_list'][0]
@@ -45,5 +49,5 @@ if __name__ == '__main__':
         except Exception as e:
             print('<< {0} >> 下载失败，Expection: {1}'.format(title, e))
             continue
-
-        upload_youtube(title)
+    '''
+        # upload_youtube(title)

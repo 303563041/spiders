@@ -2,8 +2,7 @@
 # 请通过pytho3 1_info_token.py 生成签名服务器专用token
 # 每个token可免费签名20次
 
-# API_TOKEN = "43cf52d6d1f59544a7fcf2717c873c31"
-API_TOKEN = "a961c1f41947dbbf46757421d9d67475"
+API_TOKEN = "43cf52d6d1f59544a7fcf2717c873c31"
 ROUTE_GEN_TOKEN = "token/gen"
 ROUTE_INFO_TOKEN = "token/info"
 
